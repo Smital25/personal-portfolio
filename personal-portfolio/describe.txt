@@ -42,12 +42,3 @@ It demonstrates ability to design, organize, validate, and manage user data with
 
 It’s modular and easy to connect to a backend like Flask or Firebase later
 
-✅ Possible Next Enhancements
-Connect to Firebase/Flask backend for persistent storage
-
-Add file previews, avatars, or icons for attachments
-
-Implement Dark Mode toggle
-
-Convert to a React or Vue app for SPA architecture
-
