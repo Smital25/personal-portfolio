@@ -1,0 +1,53 @@
+💼 Project Title: Personal Portfolio Dashboard
+🔍 Project Overview
+This is a web-based personal project management dashboard designed for individual developers or students to manage their own project tasks, track deadlines, and maintain project data efficiently — all from the browser using localStorage.
+
+It’s part of the Personal Portfolio Website, acting as a private dashboard after login, showcasing skills in:
+
+Frontend UI/UX
+
+Data handling in the browser
+
+Project analytics
+
+File and CSV interaction
+
+Date/calendar-based task management
+
+🧱 Tech Stack
+HTML5 + CSS3: Responsive UI with a clean design
+
+JavaScript (Vanilla): Dynamic behavior, state management, file parsing
+
+Browser localStorage: Offline data persistence
+
+No backend is used — perfect for client-side demonstration
+
+🌟 Core Features
+Feature	Description
+🔐 Login & Auth Check	Validates login from stored credentials using localStorage, redirects unauthorized access
+📝 Add Projects	Users can add new projects with title, description, deadline, status, category, optional link and file
+📊 Project Analytics	Displays live stats: total, completed, in-progress, overdue projects
+🎨 Category Filter	Lets users filter projects by Web, AI/ML, Design, Mobile, Others
+🗓️ Calendar View	Interactive monthly calendar shows upcoming project deadlines
+📤 Export to CSV	Download all project data in a clean .csv format for offline backup
+📥 Import CSV	Bulk upload project data from .csv files
+🧠 Motivational Quotes	Displays random inspirational quote every time the dashboard loads
+🗑️ Delete Projects	Each project has a remove button to delete it from dashboard instantly
+
+💡 Why It’s Valuable
+It shows how you can build a functional single-page dashboard using just frontend tech
+
+It demonstrates ability to design, organize, validate, and manage user data without a database
+
+It’s modular and easy to connect to a backend like Flask or Firebase later
+
+✅ Possible Next Enhancements
+Connect to Firebase/Flask backend for persistent storage
+
+Add file previews, avatars, or icons for attachments
+
+Implement Dark Mode toggle
+
+Convert to a React or Vue app for SPA architecture
+

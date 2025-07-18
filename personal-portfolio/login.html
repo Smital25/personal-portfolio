@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Personal Portfolio</title>
+
+  <!-- ─── Inline CSS ──────────────────────────────────────────────────────── -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #fdfdfd;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: #4f46e5;
+      color: #fff;
+    }
+    .navbar .logo a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .nav-links a {
+      margin-left: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Login Section */
+    section {
+      padding: 60px 20px;
+      max-width: 400px;
+      margin: auto;
+    }
+    h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #4f46e5;
+      text-align: center;
+    }
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    #forgotPassword {
+      font-size: 14px;
+      text-align: right;
+      color: #4f46e5;
+      text-decoration: none;
+    }
+    #forgotPassword:hover {
+      text-decoration: underline;
+    }
+    button {
+      padding: 12px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #3730a3;
+    }
+    .form-footer {
+      text-align: center;
+      font-size: 14px;
+    }
+    .form-footer a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f1f1f1;
+      color: #666;
+      font-size: 14px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navbar ──────────────────────────────────────────────────────────── -->
+  <header class="navbar">
+    <div class="logo"><a href="index.html">Personal Portfolio</a></div>
+    <nav class="nav-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+    </nav>
+  </header>
+
+  <!-- ─── Login Form ──────────────────────────────────────────────────────── -->
+  <section>
+    <h2>Login</h2>
+
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+
+      <!-- Forgot password link -->
+      <a href="#" id="forgotPassword">Forgot Password?</a>
+
+      <button type="submit">Login</button>
+
+      <div class="form-footer">
+        <p>Don’t have an account? <a href="signup.html">Signup here</a></p>
+      </div>
+    </form>
+  </section>
+
+  <!-- ─── Footer ─────────────────────────────────────────────────────────── -->
+  <footer>
+    <p>© 2025 Personal Portfolio — All rights reserved.</p>
+  </footer>
+
+  <!-- ─── JavaScript ──────────────────────────────────────────────────────── -->
+  <script>
+  document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!email || !password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    const emailRegex = /^[^@]+@[^@]+\.[a-z]{2,}$/i;
+    if (!emailRegex.test(email)) {
+      alert("Invalid email format.");
+      return;
+    }
+
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters.");
+      return;
+    }
+
+    // Simulate successful login
+    alert("Login successful!");
+
+    // Save login to localStorage
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userEmail", email);
+
+    // Redirect to dashboard
+    window.location.href = "dashboard.html";
+  });
+
+  document.getElementById("forgotPassword").addEventListener("click", function (e) {
+    e.preventDefault();
+    const email = prompt("Please enter your email address:");
+    const emailRegex = /^[^@]+@[^@]+\.[a-z]{2,}$/i;
+
+    if (!email) {
+      alert("Email is required.");
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      alert("Invalid email format.");
+      return;
+    }
+
+    alert(`A password reset link has been sent to ${email}`);
+  });
+</script>
+</body>
+</html>

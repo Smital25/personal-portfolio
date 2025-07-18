@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smital.dev | Landing Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #fdfdfd;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #4f46e5;
+      color: white;
+    }
+
+    .navbar .logo a {
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background-color: #eef2ff;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      color: #4f46e5;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .hero .btn {
+      padding: 12px 24px;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .hero .btn:hover {
+      background-color: #3730a3;
+    }
+
+    /* Shared Section Styles */
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #4f46e5;
+    }
+
+    .card-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      padding: 0 40px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f1f1f1;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .card img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo"><a href="index.html">Personal Portfolio</a></div>
+    <nav class="nav-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to <span>Personal Portfolio</span></h1>
+    <p>Crafting clean, modern, and meaningful digital experiences.</p>
+    <a href="about.html" class="btn">Learn More</a>
+  </section>
+
+  <!-- Benefits Section -->
+<section>
+  <h2>Benefits</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="assets/images/responsive.webp" alt="Responsive Design" />
+      <h3>Responsive Design</h3>
+      <p>Looks great on all devices — phones, tablets, and desktops.</p>
+    </div>
+    <div class="card">
+      <img src="assets/images/clean-code.png" alt="Clean Code" />
+      <h3>Clean Code</h3>
+      <p>Organized, maintainable, and developer-friendly code structure.</p>
+    </div>
+    <div class="card">
+      <img src="assets/images/modern-ui.avif" alt="Modern UI" />
+      <h3>Modern UI</h3>
+      <p>Built with today's design trends and user experience in mind.</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- How It Works Section -->
+<section>
+  <h2>How It Works</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="assets/images/step1.webp" alt="Step 1" />
+      <h3>Step 1</h3>
+      <p>User visits your site and sees your projects, skills, and more.</p>
+    </div>
+    <div class="card">
+      <img src="assets/images/step2.jpg" alt="Step 2" />
+      <h3>Step 2</h3>
+      <p>They contact you through the form or email button.</p>
+    </div>
+    <div class="card">
+      <img src="assets/images/step3.webp" alt="Step 3" />
+      <h3>Step 3</h3>
+      <p>You impress them with your portfolio and land an opportunity!</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Reviews Section -->
+<section>
+  <h2>What People Say</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="assets/images/user1.avif" alt="Nihiraka S." />
+      <h3>Nihiraka S.</h3>
+      <p>"This portfolio stands out — clean, fast, and impressive!"</p>
+    </div>
+    <div class="card">
+      <img src="assets/images/user2.avif" alt="Rishi K." />
+      <h3>Rishina K.</h3>
+      <p>"The UI/UX design and responsiveness are excellent. Great job!"</p>
+    </div>
+    <div class="card">
+      <img src="assets/images/user3.avif" alt="Aarav M." />
+      <h3>Aarav M.</h3>
+      <p>"Professional and creative. One of the best portfolios I've seen."</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Smital — All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

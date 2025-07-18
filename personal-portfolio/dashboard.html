@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | Personal Portfolio</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #fdfdfd;
+      color: #333;
+      margin: 0;
+    }
+
+    .navbar {
+      background: #4f46e5;
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #3730a3;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 30px auto;
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .form-section, .project-section {
+      flex: 1;
+      min-width: 350px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .project-card {
+      background: #eef2ff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .delete-btn {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      background: #e5e7eb;
+      height: 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+
+    .progress-bar > div {
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+
+    .quote {
+      text-align: center;
+      font-style: italic;
+      color: #666;
+      margin: 40px auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f1f1f1;
+      color: #666;
+      font-size: 14px;
+    }
+
+    #calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .calendar-day {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      min-height: 60px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .calendar-day .badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: #4f46e5;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 50%;
+      font-size: 12px;
+    }
+
+    .filters {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .filters .btn {
+      margin: 5px 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Dashboard</div>
+    <button class="btn" onclick="logout()">Logout</button>
+  </header>
+
+  <div class="welcome">
+    <h1>Welcome to your dashboard!</h1>
+    <p id="userInfo"></p>
+  </div>
+
+  <div class="container">
+    <div class="form-section">
+      <h2 style="color:#4f46e5;">📊 Project Summary</h2>
+      <p id="totalProjects">📁 Total Projects: 0</p>
+      <p id="completedProjects">✅ Completed: 0</p>
+      <p id="progressProjects">🚧 In Progress: 0</p>
+      <p id="overdueProjects">❌ Overdue: 0</p>
+      <hr style="margin:20px 0;"/>
+
+      <h2 style="color:#4f46e5;">➕ Add New Project</h2>
+      <form id="projectForm">
+        <input type="text" id="projectTitle" placeholder="Project Title" required />
+        <textarea id="projectDesc" placeholder="Project Description" required></textarea>
+        <input type="date" id="projectDeadline" required />
+        <select id="projectStatus" required>
+          <option value="">Select Status</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+        <select id="projectCategory" required>
+          <option value="">Select Category</option>
+          <option value="Web Development">Web Development</option>
+          <option value="AI/ML">AI / Machine Learning</option>
+          <option value="Design">Design</option>
+          <option value="Mobile App">Mobile App</option>
+          <option value="Others">Others</option>
+        </select>
+        <input type="url" id="projectLink" placeholder="Project Link (optional)" />
+        <input type="file" id="projectFile" accept=".pdf,.zip,.html,.txt,.docx,.png,.jpg" />
+        <button type="submit" class="btn">Add Project</button>
+      </form>
+
+      <h3 style="margin-top:30px;">📁 Import/Export Projects</h3>
+      <div style="text-align:center;">
+        <button class="btn" onclick="downloadCSV()">📤 Export to CSV</button>
+        <br><br>
+        <input type="file" id="csvInput" accept=".csv" />
+        <button class="btn" onclick="importCSV()">📥 Import from CSV</button>
+      </div>
+    </div>
+    <!-- Project Section -->
+    <div class="project-section">
+      <h2 style="color:#4f46e5;">📂 Your Projects</h2>
+
+      <!-- Filter Buttons -->
+      <div class="filters">
+        <button class="btn" onclick="filterCategory('All')">All</button>
+        <button class="btn" onclick="filterCategory('Web Development')">Web Dev</button>
+        <button class="btn" onclick="filterCategory('AI/ML')">AI/ML</button>
+        <button class="btn" onclick="filterCategory('Design')">Design</button>
+        <button class="btn" onclick="filterCategory('Mobile App')">Mobile App</button>
+        <button class="btn" onclick="filterCategory('Others')">Others</button>
+      </div>
+
+      <div id="projectList"></div>
+
+      <h2 style="color:#4f46e5;">📅 Deadlines Calendar</h2>
+      <div id="calendar"></div>
+      <div id="deadlineList" style="margin-top: 20px;"></div>
+    </div>
+  </div>
+
+  <div class="quote" id="quoteBox"></div>
+
+  <footer>
+    <p>© 2025 Personal Portfolio — All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ✅ User Check & Initials
+    const userEmail = localStorage.getItem("userEmail");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (!isLoggedIn || isLoggedIn !== "true") {
+      alert("Unauthorized! Please login.");
+      window.location.href = "login.html";
+    }
+
+    document.getElementById("userInfo").textContent = "Logged in as: " + userEmail;
+
+    const titleInput = document.getElementById("projectTitle");
+    const descInput = document.getElementById("projectDesc");
+    const deadlineInput = document.getElementById("projectDeadline");
+    const statusInput = document.getElementById("projectStatus");
+    const categoryInput = document.getElementById("projectCategory");
+    const linkInput = document.getElementById("projectLink");
+    const fileInput = document.getElementById("projectFile");
+    const projectList = document.getElementById("projectList");
+    const projectForm = document.getElementById("projectForm");
+
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userEmail");
+      alert("Logged out.");
+      window.location.href = "index.html";
+    }
+
+    function showMotivation() {
+      const quotes = [
+        "Believe in yourself and all that you are.",
+        "Success is no accident. It’s hard work and persistence.",
+        "Push yourself, because no one else is going to do it for you.",
+        "Stay focused and never give up.",
+        "Make it happen. Shock everyone."
+      ];
+      const random = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById("quoteBox").textContent = `"${random}"`;
+    }
+
+    function downloadCSV() {
+      const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+      if (projects.length === 0) {
+        alert("No projects to export.");
+        return;
+      }
+
+      const headers = ["Title", "Description", "Deadline", "Status", "Category", "Link", "FileName"];
+      const rows = projects.map(p => [
+        `"${p.title}"`,
+        `"${p.description}"`,
+        p.deadline,
+        p.status,
+        p.category || "",
+        p.link || "",
+        p.file?.name || ""
+      ]);
+
+      const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute("download", "projects.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function importCSV() {
+      const fileInput = document.getElementById("csvInput");
+      const file = fileInput.files[0];
+
+      if (!file) {
+        alert("Please select a CSV file.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const text = e.target.result;
+        const lines = text.split("\n").map(line => line.trim()).filter(Boolean);
+        const headers = lines[0].split(",").map(h => h.replace(/"/g, '').trim());
+        const projects = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i].split(",").map(col => col.replace(/"/g, '').trim());
+          const obj = {
+            title: cols[headers.indexOf("Title")] || "Untitled",
+            description: cols[headers.indexOf("Description")] || "",
+            deadline: cols[headers.indexOf("Deadline")] || "",
+            status: cols[headers.indexOf("Status")] || "In Progress",
+            category: cols[headers.indexOf("Category")] || "",
+            link: cols[headers.indexOf("Link")] || "",
+            file: cols[headers.indexOf("FileName")] ? { name: cols[headers.indexOf("FileName")] } : null
+          };
+          projects.push(obj);
+        }
+
+        const existing = JSON.parse(localStorage.getItem("projects") || "[]");
+        localStorage.setItem("projects", JSON.stringify([...existing, ...projects]));
+        alert("Projects imported successfully!");
+        loadProjects();
+        renderCalendar();
+      };
+
+      reader.readAsText(file);
+    }
+    function deleteProject(index) {
+      const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+      projects.splice(index, 1);
+      localStorage.setItem("projects", JSON.stringify(projects));
+      loadProjects();
+      renderCalendar();
+    }
+
+    function filterCategory(cat) {
+      loadProjects(cat);
+    }
+
+    function loadProjects(categoryFilter = "All") {
+      const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+      const today = new Date();
+      let completed = 0, progress = 0, overdue = 0;
+
+      projectList.innerHTML = "";
+      const filtered = categoryFilter === "All" ? projects : projects.filter(p => p.category === categoryFilter);
+
+      filtered.forEach((project, index) => {
+        const deadlineDate = new Date(project.deadline);
+        const timeDiff = deadlineDate - today;
+        const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+        let progressColor = "#10b981";
+        let progressWidth = "100%";
+        let reminder = "";
+
+        if (project.status === "Completed") {
+          reminder = "✅ Completed";
+          completed++;
+        } else if (daysLeft < 0) {
+          reminder = "❌ Overdue";
+          progressColor = "#ef4444";
+          overdue++;
+        } else {
+          progress++;
+          reminder = daysLeft <= 2 ? `⏰ Due in ${daysLeft} day(s)!` : `In Progress – ${daysLeft} day(s) left`;
+          progressColor = daysLeft <= 2 ? "#f59e0b" : "#10b981";
+          progressWidth = Math.min(100, 100 - daysLeft * 10) + "%";
+        }
+
+        const card = document.createElement("div");
+        card.className = "project-card";
+        card.innerHTML = `
+          <h3>${project.title}</h3>
+          <p><strong>Description:</strong> ${project.description}</p>
+          <p><strong>Deadline:</strong> ${project.deadline}</p>
+          <p><strong>Status:</strong> ${project.status}</p>
+          <p><strong>Category:</strong> ${project.category}</p>
+          ${project.link ? `<p><strong>Link:</strong> <a href="${project.link}" target="_blank">${project.link}</a></p>` : ""}
+          ${project.file?.name ? `<p><strong>Attachment:</strong> ${project.file.name}</p>` : ""}
+          <p><strong>Reminder:</strong> ${reminder}</p>
+          <div class="progress-bar"><div style="width: ${progressWidth}; background: ${progressColor};"></div></div>
+          <br>
+          <button class="delete-btn" onclick="deleteProject(${index})"> Delete </button>
+        `;
+        projectList.appendChild(card);
+      });
+
+      document.getElementById("totalProjects").textContent = `📁 Total Projects: ${projects.length}`;
+      document.getElementById("completedProjects").textContent = `✅ Completed: ${completed}`;
+      document.getElementById("progressProjects").textContent = `🚧 In Progress: ${progress}`;
+      document.getElementById("overdueProjects").textContent = `❌ Overdue: ${overdue}`;
+    }
+
+    projectForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const title = titleInput.value.trim();
+      const desc = descInput.value.trim();
+      const deadline = deadlineInput.value;
+      const status = statusInput.value;
+      const category = categoryInput.value;
+      const link = linkInput.value.trim();
+      const file = fileInput.files[0];
+
+      if (!title || !desc || !deadline || !status || !category) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const newProject = {
+        title,
+        description: desc,
+        deadline,
+        status,
+        category,
+        link,
+        file: file ? { name: file.name } : null
+      };
+
+      const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+      projects.push(newProject);
+      localStorage.setItem("projects", JSON.stringify(projects));
+      projectForm.reset();
+      loadProjects();
+      renderCalendar();
+    });
+
+    function renderCalendar() {
+      const calendar = document.getElementById("calendar");
+      const deadlineList = document.getElementById("deadlineList");
+      calendar.innerHTML = "";
+      deadlineList.innerHTML = "";
+
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+      const dateMap = {};
+
+      projects.forEach(p => {
+        const date = new Date(p.deadline);
+        if (date.getMonth() === month && date.getFullYear() === year) {
+          const day = date.getDate();
+          if (!dateMap[day]) dateMap[day] = [];
+          dateMap[day].push(p);
+        }
+      });
+
+      for (let i = 0; i < firstDay; i++) {
+        calendar.innerHTML += `<div></div>`;
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const projectsToday = dateMap[d] || [];
+        const badge = projectsToday.length ? `<span class="badge">${projectsToday.length}</span>` : "";
+        const dayEl = document.createElement("div");
+        dayEl.className = "calendar-day";
+        dayEl.innerHTML = `${d}${badge}`;
+        dayEl.onclick = () => showDeadlinesForDay(d, projectsToday);
+        calendar.appendChild(dayEl);
+      }
+    }
+
+    function showDeadlinesForDay(day, projects) {
+      const box = document.getElementById("deadlineList");
+      box.innerHTML = `<h3>📌 Projects due on ${day}</h3>`;
+      if (projects.length === 0) {
+        box.innerHTML += `<p>No projects due on this day.</p>`;
+        return;
+      }
+      projects.forEach(p => {
+        box.innerHTML += `
+          <div style="padding:10px; margin-bottom:10px; background:#eef2ff; border-radius:6px;">
+            <strong>${p.title}</strong><br/>
+            <small>${p.description}</small><br/>
+            <span>Status: ${p.status}</span>
+          </div>
+        `;
+      });
+    }
+
+    // INIT
+    showMotivation();
+    loadProjects();
+    renderCalendar();
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About | Personal Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #fdfdfd;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #4f46e5;
+      color: white;
+    }
+
+    .navbar .logo a {
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #4f46e5;
+    }
+
+    .about-container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-container img {
+      width: 180px;
+      height: 180px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .about-container p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+      padding: 0 40px;
+    }
+
+    .skill-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .skill-card h3 {
+      color: #4f46e5;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f1f1f1;
+      color: #666;
+      font-size: 14px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo"><a href="index.html">Personal Portfolio</a></div>
+    <nav class="nav-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+    </nav>
+  </header>
+
+  <!-- About Company Section -->
+  <section>
+    <h2>About Our Company</h2>
+    <div class="about-container">
+      <p>
+        <strong>Personal Portfolio</strong> is a creative and tech-focused company committed to building beautiful, responsive, and engaging web experiences. Founded with the vision of empowering individuals and startups with standout digital identities, we blend design with functionality to deliver exceptional results.
+      </p>
+      <p>
+        From clean UI/UX to robust backend systems, our team specializes in full-stack development and digital branding. Whether you're looking to showcase your personal work, launch a startup, or revamp your online presence, we're here to bring your vision to life.
+      </p>
+    </div>
+
+    <!-- Company Vision / Skills -->
+    <h2>Our Expertise</h2>
+    <div class="skills">
+      <div class="skill-card">
+        <h3>Custom Web Design</h3>
+        <p>Tailored interfaces designed with usability and elegance in mind.</p>
+      </div>
+      <div class="skill-card">
+        <h3>Frontend Technologies</h3>
+        <p>HTML, CSS, JavaScript, React, Bootstrap, Responsive UI</p>
+      </div>
+      <div class="skill-card">
+        <h3>Backend & APIs</h3>
+        <p>Flask, MongoDB, Firebase, Node.js, RESTful APIs</p>
+      </div>
+      <div class="skill-card">
+        <h3>Deployment & Tools</h3>
+        <p>GitHub, Vercel, Netlify, Firebase Hosting, Postman</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© Smital 2025 — All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
